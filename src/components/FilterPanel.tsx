@@ -23,14 +23,12 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   onFiltersChange,
   movies
 }) => {
-  if (!isOpen) return null;
-
   // Common genre fallbacks when no genre data is available
-  const commonGenres = [
+  const commonGenres = React.useMemo(() => [
     'Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary',
     'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance',
     'Sci-Fi', 'Sport', 'Thriller', 'War', 'Western'
-  ];
+  ], []);
 
   // Extract unique genres from movies
   const availableGenres = React.useMemo(() => {
@@ -54,7 +52,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     console.log('Movies with genre data:', movies.filter(m => m.Genre && m.Genre !== 'N/A').length);
     
     return Array.from(genreSet).sort();
-  }, [movies]);
+  }, [movies, commonGenres]);
 
   // Get year range from movies
   const yearRange = React.useMemo(() => {
@@ -67,6 +65,9 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       max: Math.max(...years, new Date().getFullYear())
     };
   }, [movies]);
+
+  // React hooks must be called before any early returns
+  if (!isOpen) return null;
 
   const handleGenreToggle = (genre: string) => {
     const newGenres = filters.genres.includes(genre)

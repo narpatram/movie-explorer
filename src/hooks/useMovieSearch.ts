@@ -33,7 +33,6 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [hasMoreResults, setHasMoreResults] = useState(false);
-  const [trendingPage, setTrendingPage] = useState(1);
   
   // Keep track of current search to prevent race conditions
   const currentSearchRef = useRef<string>('');
@@ -146,16 +145,6 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
       fetchSearchResults(debouncedSearchTerm, nextPage, true);
     }
   }, [debouncedSearchTerm, hasMoreResults, isLoadingMore, currentPage, fetchSearchResults]);
-
-  // Load more trending movies
-  const loadMoreTrendingMovies = useCallback(() => {
-    if (!isLoadingMore) {
-      const nextPage = trendingPage + 1;
-      setTrendingPage(nextPage);
-      setIsLoadingMore(true);
-      fetchTrendingMovies(nextPage, true).finally(() => setIsLoadingMore(false));
-    }
-  }, [trendingPage, isLoadingMore, fetchTrendingMovies]);
 
   // Fetch trending movies on initial load
   useEffect(() => {
