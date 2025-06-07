@@ -136,21 +136,23 @@
 
 @media (max-width: 768px) {
   .search-bar {
-    max-width: 300px;
+    max-width: 100%;
+    width: 100%;
   }
   
   .search-input {
-    padding: 0.6rem 1rem 0.6rem 2.5rem;
-    font-size: 0.85rem;
+    padding: 0.65rem 1rem 0.65rem 2.5rem;
+    font-size: 0.9rem;
+    width: 100%;
   }
   
   .search-input::placeholder {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
   
   .search-input-container::before {
     left: 0.8rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
   
   .search-loading {
@@ -158,29 +160,31 @@
   }
   
   .spinner {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-width: 1.5px;
   }
 }
 
 @media (max-width: 480px) {
   .search-bar {
-    max-width: 200px;
+    max-width: 100%;
+    width: 100%;
   }
   
   .search-input {
-    padding: 0.5rem 0.8rem 0.5rem 2.2rem;
-    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem 0.6rem 2.2rem;
+    font-size: 0.85rem;
+    width: 100%;
   }
   
   .search-input::placeholder {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
   
   .search-input-container::before {
     left: 0.7rem;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
   
   .search-loading {
@@ -188,8 +192,8 @@
   }
   
   .spinner {
-    width: 12px;
-    height: 12px;
-    border-width: 1px;
+    width: 14px;
+    height: 14px;
+    border-width: 1.5px;
   }
 } 
