@@ -24,6 +24,14 @@ A modern, responsive movie discovery application built with React, TypeScript, a
 - **Quick Access**: Dedicated favorites modal
 - **Visual Indicators**: Heart icons with favorites count
 
+### 📂 Custom Collections
+- **Create Collections**: Organize movies into themed collections
+- **Collection Management**: Add, edit, delete, and manage collections
+- **Add Movies**: Quickly add movies to collections from any movie card
+- **Collection Browser**: Dedicated modal to view and manage all collections
+- **Persistent Storage**: Collections saved locally in browser
+- **Rich Metadata**: Collection names, descriptions, and movie counts
+
 ### 📱 Responsive Design
 - **Mobile-First**: Optimized for mobile devices
 - **Touch-Friendly**: Large tap targets and smooth interactions
@@ -51,7 +59,7 @@ A modern, responsive movie discovery application built with React, TypeScript, a
 - **Styling**: Modern CSS3 with custom properties
 - **API**: OMDb API (IMDB data)
 - **State Management**: React Hooks
-- **Storage**: localStorage for favorites
+- **Storage**: localStorage for favorites and collections
 
 ## 🚀 Quick Start
 
@@ -107,10 +115,14 @@ movie-explorer/
 │   │   ├── MovieGrid.tsx     # Responsive grid layout
 │   │   ├── SearchBar.tsx     # Search input with dropdown
 │   │   ├── SearchDropdown.tsx # Search results preview
-│   │   └── FavoritesModal.tsx # Favorites management
+│   │   ├── FavoritesModal.tsx # Favorites management
+│   │   ├── ListsModal.tsx    # Collections browser & management
+│   │   ├── CreateCollectionModal.tsx # New collection creation
+│   │   └── AddToListModal.tsx # Add movies to collections
 │   ├── hooks/               # Custom React hooks
 │   │   ├── useMovieSearch.ts # Search logic & state
 │   │   ├── useFavorites.ts   # Favorites management
+│   │   ├── useCustomCollections.ts # Collections management
 │   │   ├── useFilters.ts     # Filter functionality
 │   │   └── useInfiniteScroll.ts # Infinite scrolling
 │   ├── services/            # API services
@@ -168,11 +180,12 @@ Set these environment variables in your hosting platform:
 
 ## 📱 Mobile Features
 
-- **Horizontal Header**: Movie icon, search bar, filter & favorites buttons
+- **Horizontal Header**: Movie icon, search bar, filter, collections & favorites buttons
 - **Single Column Grid**: Optimized card sizing for mobile screens
 - **Touch Interactions**: Smooth touch scrolling and interactions
 - **Compact Cards**: Smaller movie cards for better mobile experience
-- **Icon Navigation**: Filter and favorites show as icons with counts
+- **Icon Navigation**: Filter, collections and favorites show as icons with counts
+- **Mobile Collections**: Touch-friendly collection management and movie addition
 
 ## 🎨 Design System
 
@@ -222,6 +235,32 @@ Set these environment variables in your hosting platform:
 - ✅ **Robots.txt**: Search engine crawling guidelines
 - ✅ **Semantic HTML**: Proper heading hierarchy and landmarks
 - ✅ **Performance**: Fast loading times for better SEO ranking
+
+## 📂 Using Collections
+
+### Creating Collections
+1. Click the **Collections** button (📝 icon) in the header
+2. Click **"+ Create New Collection"**
+3. Enter a collection name (e.g., "Date Night Movies")
+4. Optionally add a description
+5. Click **"Create Collection"**
+
+### Adding Movies to Collections
+1. **From Movie Cards**: Click **"+ Add to Collection"** on any movie card
+2. **Select Collections**: Choose existing collections or create a new one
+3. **Bulk Adding**: Select multiple collections at once
+
+### Managing Collections
+- **View Collection**: Click on any collection to see its movies
+- **Edit Collection**: Click the edit (✏️) button to modify name/description
+- **Delete Collection**: Click the delete (🗑️) button to remove a collection
+- **Remove Movies**: Use "Remove from Collection" button within collection view
+
+### Collection Features
+- **Persistent Storage**: All collections are saved in your browser
+- **Rich Metadata**: Each collection shows movie count and creation date
+- **Search Integration**: Easily add search results to collections
+- **Mobile Optimized**: Touch-friendly collection management
 
 ## 🐛 Troubleshooting
 
