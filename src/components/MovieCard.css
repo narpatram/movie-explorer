@@ -193,34 +193,8 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .movie-info {
-    padding: 1.25rem;
-    gap: 0.6rem;
-  }
-  
-  .movie-title {
-    font-size: 1.1rem;
-  }
-  
-  .movie-details {
-    gap: 0.75rem;
-  }
-  
-  .movie-year,
-  .movie-rating {
-    font-size: 0.8rem;
-    padding: 0.2rem 0.6rem;
-  }
-  
-  .movie-genre,
-  .movie-overview {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .movie-card:hover {
-    transform: translateY(-4px) scale(1.01);
+  .movie-poster {
+    padding-bottom: 130%; /* Slightly smaller aspect ratio for tablets */
   }
   
   .movie-info {
@@ -230,10 +204,83 @@
   
   .movie-title {
     font-size: 1rem;
+    -webkit-line-clamp: 1;
+  }
+  
+  .movie-details {
+    gap: 0.5rem;
+  }
+  
+  .movie-year,
+  .movie-rating {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+  }
+  
+  .movie-genre,
+  .movie-overview {
+    font-size: 0.75rem;
+  }
+
+  .movie-overview {
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-poster {
+    padding-bottom: 120%; /* Even smaller aspect ratio for mobile */
+  }
+  
+  .movie-card:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .movie-info {
+    padding: 0.75rem;
+    gap: 0.4rem;
+  }
+  
+  .movie-title {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 1;
+  }
+  
+  .movie-details {
+    gap: 0.4rem;
+    flex-wrap: nowrap;
+  }
+  
+  .movie-year,
+  .movie-rating {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 8px;
+  }
+  
+  .movie-genre {
+    font-size: 0.7rem;
+    max-width: 80px;
+  }
+  
+  .movie-overview {
+    font-size: 0.7rem;
+    -webkit-line-clamp: 1;
+    line-height: 1.3;
   }
   
   .view-details {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .favorite-btn {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.3rem;
+  }
+
+  .favorite-icon {
+    font-size: 1.2rem;
   }
 }
 

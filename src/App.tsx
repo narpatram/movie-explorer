@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import TuneIcon from '@mui/icons-material/Tune';
 import SearchBar from './components/SearchBar';
 import MovieGrid from './components/MovieGrid';
 import MovieDetail from './components/MovieDetail';
@@ -138,6 +139,28 @@ function App() {
     resetFilters();
   };
 
+  const getActiveFiltersCount = () => {
+    let count = 0;
+    
+    // Count selected genres
+    if (filters.genres.length > 0) {
+      count += filters.genres.length;
+    }
+    
+    // Check if year range is different from default (assuming default is full range)
+    const currentYear = new Date().getFullYear();
+    if (filters.yearRange.min > 1900 || filters.yearRange.max < currentYear) {
+      count += 1;
+    }
+    
+    // Check if rating range is different from default (0-10)
+    if (filters.ratingRange.min > 0 || filters.ratingRange.max < 10) {
+      count += 1;
+    }
+    
+    return count;
+  };
+
   return (
     <div className="app">
       <header className="app-header">
@@ -168,9 +191,9 @@ function App() {
               className={`filter-btn ${hasActiveFilters ? 'active' : ''}`} 
               onClick={handleFilterClick}
             >
-              <span className="filter-icon">🔍</span>
+              <TuneIcon className="filter-icon" />
               <span className="filter-text">Filters</span>
-              {hasActiveFilters && <span className="filter-indicator">•</span>}
+              {hasActiveFilters && <span className="filter-count">{getActiveFiltersCount()}</span>}
             </button>
             <button className="favorites-btn" onClick={handleFavoritesClick}>
               <span className="favorites-icon">❤️</span>

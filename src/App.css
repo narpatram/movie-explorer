@@ -167,11 +167,20 @@ body {
   font-weight: 600;
 }
 
-.filter-indicator {
-  color: var(--primary-gold);
-  font-size: 1.2rem;
+.filter-count {
+  background: var(--primary-gold);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 8px;
+  min-width: 16px;
+  text-align: center;
   line-height: 1;
-  animation: pulse 2s infinite;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  transform: scale(0.9);
 }
 
 @keyframes pulse {
@@ -499,11 +508,13 @@ body {
     font-size: 1.2rem;
   }
 
-  .filter-indicator {
-    font-size: 0.8rem;
-    position: absolute;
-    top: -2px;
-    right: -2px;
+  .filter-count {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.3rem;
+    min-width: 14px;
+    top: -4px;
+    right: -4px;
+    transform: scale(0.85);
   }
 
   .content-section {
@@ -587,10 +598,13 @@ body {
     transform: scale(0.85);
   }
 
-  .filter-indicator {
-    font-size: 0.7rem;
-    top: -1px;
-    right: -1px;
+  .filter-count {
+    font-size: 0.55rem;
+    padding: 0.08rem 0.25rem;
+    min-width: 12px;
+    top: -3px;
+    right: -3px;
+    transform: scale(0.8);
   }
   
   .content-section {
