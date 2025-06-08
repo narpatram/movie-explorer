@@ -26,7 +26,9 @@ export const useFavorites = (): UseFavoritesReturn => {
         setFavoriteIds(new Set(storedFavorites.map(movie => movie.imdbID)));
       }
     } catch (error) {
-      console.error('Error loading favorites from localStorage:', error);
+      // Fallback to empty favorites if localStorage read fails
+      setFavorites([]);
+      setFavoriteIds(new Set());
     }
   }, []);
 
@@ -35,7 +37,8 @@ export const useFavorites = (): UseFavoritesReturn => {
     try {
       localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
     } catch (error) {
-      console.error('Error saving favorites to localStorage:', error);
+      // Silently handle localStorage save errors
+      // User data will still work in current session
     }
   }, [favorites]);
 

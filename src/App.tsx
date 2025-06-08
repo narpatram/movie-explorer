@@ -139,6 +139,13 @@ function App() {
     resetFilters();
   };
 
+  const handleTitleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleTitleClick();
+    }
+  };
+
   const getActiveFiltersCount = () => {
     let count = 0;
     
@@ -163,11 +170,21 @@ function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      <header className="app-header" role="banner">
         <div className="header-content">
           <div className="header-left">
-            <h1 className="app-title" onClick={handleTitleClick}>
-              🎬 Movie Explorer
+            <h1 
+              className="app-title" 
+              onClick={handleTitleClick} 
+              onKeyDown={handleTitleKeyDown}
+              tabIndex={0} 
+              role="button" 
+              aria-label="Go to home page"
+            >
+              <span aria-hidden="true">🎬</span> Movie Explorer
             </h1>
           </div>
           
@@ -190,29 +207,48 @@ function App() {
             <button 
               className={`filter-btn ${hasActiveFilters ? 'active' : ''}`} 
               onClick={handleFilterClick}
+              aria-label={`Open filters ${hasActiveFilters ? `(${getActiveFiltersCount()} active)` : ''}`}
+              aria-expanded={isFilterPanelOpen}
+              aria-haspopup="dialog"
             >
-              <TuneIcon className="filter-icon" />
+              <TuneIcon className="filter-icon" aria-hidden="true" />
               <span className="filter-text">Filters</span>
-              {hasActiveFilters && <span className="filter-count">{getActiveFiltersCount()}</span>}
+              {hasActiveFilters && (
+                <span className="filter-count" aria-label={`${getActiveFiltersCount()} active filters`}>
+                  {getActiveFiltersCount()}
+                </span>
+              )}
             </button>
-            <button className="favorites-btn" onClick={handleFavoritesClick}>
-              <span className="favorites-icon">❤️</span>
+            <button 
+              className="favorites-btn" 
+              onClick={handleFavoritesClick}
+              aria-label={`Open favorites (${favoritesCount} saved)`}
+              aria-expanded={isFavoritesModalOpen}
+              aria-haspopup="dialog"
+            >
+              <span className="favorites-icon" aria-hidden="true">❤️</span>
               <span className="favorites-text">Favorites</span>
-              <span className="favorites-count">{favoritesCount}</span>
+              <span className="favorites-count" aria-label={`${favoritesCount} favorites`}>
+                {favoritesCount}
+              </span>
             </button>
           </div>
         </div>
       </header>
 
-      <main className="app-main">
+      <main className="app-main" role="main" aria-label="Movie content" id="main-content">
         <div className={`content-section ${searchTerm && !showAllResults ? 'dimmed' : ''}`}>
           {shouldShowSection() && (
             <>
               <div className="section-header">
-                <h2>{getSectionTitle()}</h2>
-                <p>{getSectionSubtitle()}</p>
+                <h2 id="main-heading">{getSectionTitle()}</h2>
+                <p id="section-description">{getSectionSubtitle()}</p>
                 {hasActiveFilters && (
-                  <button className="clear-filters-btn" onClick={resetFilters}>
+                  <button 
+                    className="clear-filters-btn" 
+                    onClick={resetFilters}
+                    aria-label="Clear all active filters"
+                  >
                     Clear Filters
                   </button>
                 )}
@@ -295,13 +331,14 @@ function App() {
         </div>
       </main>
 
-      <footer className="app-footer">
+      <footer className="app-footer" role="contentinfo">
         <p>
           Powered by{' '}
           <a 
             href="http://www.omdbapi.com/" 
             target="_blank" 
             rel="noopener noreferrer"
+            aria-label="OMDb API - Opens in new tab"
           >
             OMDb API (IMDB Data)
           </a>

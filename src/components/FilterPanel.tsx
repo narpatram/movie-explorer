@@ -48,9 +48,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       commonGenres.forEach(genre => genreSet.add(genre));
     }
     
-    console.log('Available genres:', Array.from(genreSet));
-    console.log('Movies with genre data:', movies.filter(m => m.Genre && m.Genre !== 'N/A').length);
-    
     return Array.from(genreSet).sort();
   }, [movies, commonGenres]);
 
@@ -109,12 +106,22 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   };
 
   return (
-    <div className="filter-panel-overlay" onClick={handleBackdropClick}>
+    <div 
+      className="filter-panel-overlay" 
+      onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="filter-panel-title"
+    >
       <div className="filter-panel">
         <div className="filter-panel-header">
-          <h3>Filter Movies</h3>
-          <button className="filter-panel-close" onClick={onClose}>
-            ✕
+          <h3 id="filter-panel-title">Filter Movies</h3>
+          <button 
+            className="filter-panel-close" 
+            onClick={onClose}
+            aria-label="Close filter panel"
+          >
+            <span aria-hidden="true">✕</span>
           </button>
         </div>
 

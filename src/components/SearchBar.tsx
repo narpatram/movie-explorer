@@ -78,10 +78,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   }, [onMovieClick, onSearchChange]);
 
   return (
-    <div className="search-bar" ref={searchBarRef}>
+    <div className="search-bar" ref={searchBarRef} role="search">
+      <label htmlFor="movie-search" className="sr-only">
+        Search for movies
+      </label>
       <div className="search-input-container">
         <input
           ref={inputRef}
+          id="movie-search"
           type="text"
           placeholder="Search for movies..."
           value={searchTerm}
@@ -89,10 +93,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
           className="search-input"
           autoComplete="off"
           spellCheck="false"
+          aria-label="Search movies"
+          aria-describedby={searchTerm ? "search-results-status" : undefined}
+          aria-expanded={isDropdownVisible}
+          aria-haspopup="listbox"
+          role="combobox"
+          aria-autocomplete="list"
         />
         {isLoading && (
-          <div className="search-loading">
-            <div className="spinner"></div>
+          <div className="search-loading" aria-hidden="true">
+            <div className="spinner" role="progressbar" aria-label="Searching movies"></div>
+          </div>
+        )}
+        {searchTerm && (
+          <div id="search-results-status" className="sr-only" aria-live="polite">
+            {isLoading ? 'Searching...' : `Found ${totalResults} results for "${searchTerm}"`}
           </div>
         )}
       </div>

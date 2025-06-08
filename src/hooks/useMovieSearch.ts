@@ -68,7 +68,8 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
         }
       }
     } catch (err) {
-      console.error('Error fetching trending movies:', err);
+      // Silently handle trending movie fetch errors
+      // The app will still function with empty trending movies
     }
   }, []);
 
