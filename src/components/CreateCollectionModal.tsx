@@ -33,10 +33,11 @@ const CreateCollectionModal: React.FC<CreateCollectionModalProps> = ({
 
     onCreateList(name.trim(), description.trim() || undefined);
     
-    // Reset form
+    // Reset form and close modal
     setName('');
     setDescription('');
     setError('');
+    onClose();
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
