@@ -5,10 +5,15 @@ import MovieGrid from './components/MovieGrid';
 import MovieDetail from './components/MovieDetail';
 import FavoritesModal from './components/FavoritesModal';
 import FilterPanel from './components/FilterPanel';
+import ListsModal from './components/ListsModal';
+import CreateCollectionModal from './components/CreateCollectionModal';
+import AddToListModal from './components/AddToListModal';
 import { useMovieSearch } from './hooks/useMovieSearch';
 import { useFavorites } from './hooks/useFavorites';
 import { useInfiniteScroll } from './hooks/useInfiniteScroll';
 import { useFilters } from './hooks/useFilters';
+import { useCustomCollections } from './hooks/useCustomCollections';
+import type { Movie } from './types/movie';
 import './App.css';
 
 function App() {
@@ -16,6 +21,10 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
+  const [isListsModalOpen, setIsListsModalOpen] = useState(false);
+  const [isCreateListModalOpen, setIsCreateListModalOpen] = useState(false);
+  const [isAddToListModalOpen, setIsAddToListModalOpen] = useState(false);
+  const [selectedMovieForList, setSelectedMovieForList] = useState<Movie | null>(null);
   
   const { 
     searchResults,
@@ -40,6 +49,16 @@ function App() {
     toggleFavorite,
     favoritesCount
   } = useFavorites();
+
+  const {
+    collections,
+    createCollection,
+    updateCollection,
+    deleteCollection,
+    addMovieToCollection,
+    removeMovieFromCollection,
+    isMovieInCollection
+  } = useCustomCollections();
 
   // Use filters hook on the current display movies
   const {
@@ -127,6 +146,28 @@ function App() {
 
   const handleFilterClick = () => {
     setIsFilterPanelOpen(true);
+  };
+
+  const handleListsClick = () => {
+    setIsListsModalOpen(true);
+  };
+
+  const handleAddToListClick = (movie: Movie) => {
+    setSelectedMovieForList(movie);
+    setIsAddToListModalOpen(true);
+  };
+
+  const handleCreateCollectionFromModal = () => {
+    setIsAddToListModalOpen(false);
+    setIsCreateListModalOpen(true);
+  };
+
+  const handleCreateCollection = (name: string, description?: string) => {
+    const newCollection = createCollection({ name, description });
+    if (selectedMovieForList) {
+      addMovieToCollection(newCollection.id, selectedMovieForList);
+      setSelectedMovieForList(null);
+    }
   };
 
   const handleTitleClick = () => {
@@ -220,6 +261,19 @@ function App() {
               )}
             </button>
             <button 
+              className="collections-btn" 
+              onClick={handleListsClick}
+              aria-label={`Open collections (${collections.length} collections)`}
+              aria-expanded={isListsModalOpen}
+              aria-haspopup="dialog"
+            >
+              <span className="collections-icon" aria-hidden="true">📝</span>
+              <span className="collections-text">Collections</span>
+              <span className="collections-count" aria-label={`${collections.length} collections`}>
+                {collections.length}
+              </span>
+            </button>
+            <button 
               className="favorites-btn" 
               onClick={handleFavoritesClick}
               aria-label={`Open favorites (${favoritesCount} saved)`}
@@ -265,6 +319,7 @@ function App() {
                 onMovieClick={handleMovieClick}
                 isFavorite={isFavorite}
                 onToggleFavorite={toggleFavorite}
+                onAddToList={handleAddToListClick}
               />
               
               {/* Show trending section divider when showing search results */}
@@ -323,6 +378,7 @@ function App() {
                     onMovieClick={handleMovieClick}
                     isFavorite={isFavorite}
                     onToggleFavorite={toggleFavorite}
+                    onAddToList={handleAddToListClick}
                   />
                 </>
               )}
@@ -367,6 +423,35 @@ function App() {
         filters={filters}
         onFiltersChange={setFilters}
         movies={displayMovies}
+      />
+
+      <ListsModal
+        isOpen={isListsModalOpen}
+        onClose={() => setIsListsModalOpen(false)}
+        lists={collections}
+        onCreateList={handleCreateCollection}
+        onDeleteList={deleteCollection}
+        onUpdateList={updateCollection}
+        onRemoveMovieFromList={removeMovieFromCollection}
+        onMovieClick={handleMovieClick}
+        isFavorite={isFavorite}
+        onToggleFavorite={toggleFavorite}
+      />
+
+      <CreateCollectionModal
+        isOpen={isCreateListModalOpen}
+        onClose={() => setIsCreateListModalOpen(false)}
+        onCreateList={handleCreateCollection}
+      />
+
+      <AddToListModal
+        isOpen={isAddToListModalOpen}
+        onClose={() => setIsAddToListModalOpen(false)}
+        movie={selectedMovieForList}
+        lists={collections}
+        onAddToList={addMovieToCollection}
+        onCreateNewList={handleCreateCollectionFromModal}
+        isMovieInList={isMovieInCollection}
       />
     </div>
   );

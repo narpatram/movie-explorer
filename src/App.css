@@ -103,6 +103,7 @@ body {
 }
 
 .filter-btn,
+.collections-btn,
 .favorites-btn {
   display: flex;
   align-items: center;
@@ -123,6 +124,7 @@ body {
 }
 
 .filter-btn:hover,
+.collections-btn:hover,
 .favorites-btn:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 215, 0, 0.3);
@@ -142,6 +144,7 @@ body {
 }
 
 .filter-icon,
+.collections-icon,
 .favorites-icon {
   font-size: 1rem;
   transition: transform 0.3s ease;
@@ -149,6 +152,10 @@ body {
 
 .filter-btn:hover .filter-icon {
   transform: scale(1.1) rotate(5deg);
+}
+
+.collections-btn:hover .collections-icon {
+  transform: scale(1.1) rotate(-5deg);
 }
 
 .favorites-btn:hover .favorites-icon {
@@ -162,6 +169,7 @@ body {
 }
 
 .filter-text,
+.collections-text,
 .favorites-text {
   font-size: 0.9rem;
   font-weight: 600;
@@ -188,6 +196,7 @@ body {
   50% { opacity: 0.6; }
 }
 
+.collections-count,
 .favorites-count {
   background: var(--primary-gold);
   color: #000;
@@ -485,11 +494,13 @@ body {
   }
 
   .filter-text,
+  .collections-text,
   .favorites-text {
     display: none;
   }
 
   .filter-btn,
+  .collections-btn,
   .favorites-btn {
     display: flex;
     flex-direction: row;
@@ -504,6 +515,7 @@ body {
   }
 
   .filter-icon,
+  .collections-icon,
   .favorites-icon {
     font-size: 1.2rem;
   }
@@ -578,6 +590,7 @@ body {
   }
   
   .filter-btn,
+  .collections-btn,
   .favorites-btn {
     padding: 0.4rem;
     font-size: 0.8rem;
@@ -585,10 +598,12 @@ body {
   }
 
   .filter-icon,
+  .collections-icon,
   .favorites-icon {
     font-size: 1.1rem;
   }
 
+  .collections-count,
   .favorites-count {
     font-size: 0.6rem;
     padding: 0.1rem 0.3rem;
@@ -655,6 +670,7 @@ body {
     background: rgba(0, 0, 0, 0.95);
   }
   
+  .collections-btn,
   .favorites-btn,
   .section-header h2 {
     border-width: 2px;

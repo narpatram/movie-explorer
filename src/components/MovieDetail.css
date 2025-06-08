@@ -246,14 +246,14 @@
   flex-wrap: wrap;
 }
 
-.movie-year,
-.movie-rated,
-.movie-runtime {
+.movie-detail-modal .movie-year,
+.movie-detail-modal .movie-rated,
+.movie-detail-modal .movie-runtime {
   padding: 0.5rem 1rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  color: #ffd700;
+  color: #ffd700 !important;
   font-weight: 600;
   font-size: 0.9rem;
   backdrop-filter: blur(10px);
@@ -464,9 +464,9 @@
     gap: 0.5rem;
   }
   
-  .movie-year,
-  .movie-rated,
-  .movie-runtime {
+  .movie-detail-modal .movie-year,
+  .movie-detail-modal .movie-rated,
+  .movie-detail-modal .movie-runtime {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }

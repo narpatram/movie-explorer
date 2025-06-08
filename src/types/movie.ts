@@ -33,4 +33,18 @@ export interface SearchResponse {
 export interface SearchParams {
   query?: string;
   page?: number;
+}
+
+export interface CustomCollection {
+  id: string;
+  name: string;
+  description?: string;
+  movies: Movie[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateCollectionData {
+  name: string;
+  description?: string;
 } 

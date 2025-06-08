@@ -86,9 +86,9 @@ const SearchDropdown: React.FC<SearchDropdownProps> = ({
                           src={getImageUrl(movie.Poster)}
                           alt={movie.Title}
                           loading="lazy"
-                          onError={(e) => {
-                            e.currentTarget.src = 'https://via.placeholder.com/60x90/e5e7eb/6b7280?text=🎬';
-                          }}
+                                      onError={(e) => {
+              e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iOTAiIHZpZXdCb3g9IjAgMCA2MCA5MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjkwIiBmaWxsPSIjMzc0MTUxIi8+Cjx0ZXh0IHg9IjMwIiB5PSI0NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM2QjcyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPvCfjqw8L3RleHQ+Cjwvc3ZnPg==';
+            }}
                         />
                       </div>
                       <div className="dropdown-movie-info">

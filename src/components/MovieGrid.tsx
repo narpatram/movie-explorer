@@ -14,6 +14,8 @@ interface MovieGridProps {
   onMovieClick?: (imdbId: string) => void;
   isFavorite?: (imdbId: string) => boolean;
   onToggleFavorite?: (movie: Movie) => void;
+  onAddToList?: (movie: Movie) => void;
+  customActions?: (movie: Movie) => React.ReactNode;
 }
 
 const MovieGrid: React.FC<MovieGridProps> = ({ 
@@ -26,7 +28,9 @@ const MovieGrid: React.FC<MovieGridProps> = ({
   showLoadMoreButton = false,
   onMovieClick,
   isFavorite,
-  onToggleFavorite
+  onToggleFavorite,
+  onAddToList,
+  customActions
 }) => {
   const renderSkeletons = (count: number) => {
     return Array.from({ length: count }).map((_, index) => (
@@ -90,6 +94,8 @@ const MovieGrid: React.FC<MovieGridProps> = ({
             onClick={onMovieClick}
             isFavorite={isFavorite ? isFavorite(movie.imdbID) : false}
             onToggleFavorite={onToggleFavorite}
+            onAddToList={onAddToList}
+            customActions={customActions}
           />
         ))}
         

@@ -8,13 +8,17 @@ interface MovieCardProps {
   onClick?: (imdbId: string) => void;
   isFavorite?: boolean;
   onToggleFavorite?: (movie: Movie) => void;
+  onAddToList?: (movie: Movie) => void;
+  customActions?: (movie: Movie) => React.ReactNode;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ 
   movie, 
   onClick, 
   isFavorite = false, 
-  onToggleFavorite 
+  onToggleFavorite,
+  onAddToList,
+  customActions
 }) => {
   const handleClick = () => {
     if (onClick) {
@@ -26,6 +30,13 @@ const MovieCard: React.FC<MovieCardProps> = ({
     e.stopPropagation(); // Prevent triggering the card onClick
     if (onToggleFavorite) {
       onToggleFavorite(movie);
+    }
+  };
+
+  const handleAddToListClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the card onClick
+    if (onAddToList) {
+      onAddToList(movie);
     }
   };
 
@@ -49,7 +60,7 @@ const MovieCard: React.FC<MovieCardProps> = ({
           alt={`Movie poster for ${movie.Title}`}
           loading="lazy"
           onError={(e) => {
-            e.currentTarget.src = 'https://via.placeholder.com/300x450/e5e7eb/6b7280?text=🎬+No+Image';
+            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQ1MCIgdmlld0JveD0iMCAwIDMwMCA0NTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDUwIiBmaWxsPSIjMzc0MTUxIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMjI1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZmlsbD0iIzZCNzI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+8J+OrDwvdGV4dD4KPHRleHQgeD0iMTUwIiB5PSIyODAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNkI3MjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
             e.currentTarget.alt = `No poster available for ${movie.Title}`;
           }}
         />
@@ -83,6 +94,15 @@ const MovieCard: React.FC<MovieCardProps> = ({
               <span aria-hidden="true">⭐</span> {movie.imdbRating}
             </span>
           )}
+          {onAddToList && (
+            <button 
+              className="add-to-list-btn-inline"
+              onClick={handleAddToListClick}
+                              aria-label={`Add ${movie.Title} to a collection`}
+            >
+              + Add to Collection
+            </button>
+          )}
         </div>
         
         {movie.Genre && (
@@ -91,6 +111,13 @@ const MovieCard: React.FC<MovieCardProps> = ({
         
         {movie.Plot && (
           <p className="movie-overview">{movie.Plot}</p>
+        )}
+        
+        {/* Custom actions (for things like remove from list) */}
+        {customActions && (
+          <div className="movie-actions">
+            {customActions(movie)}
+          </div>
         )}
       </div>
     </article>
